@@ -1,0 +1,37 @@
+body {
+    background-color: #1f1e1e;
+    color: #e8e8e8;
+}
+
+/*yes you really do need all of this to style react select 😭*/
+.input-title, .input-text, .react-select__menu, .react-select__menu-list, .react-select__option {
+    background-color: #333333 !important;
+    color: #e8e8e8 !important;
+}
+
+.react-select__menu {
+    border-radius: .375rem !important;
+    overflow: hidden !important;
+    border: 1px solid #ced4da;
+}
+
+.react-select__multi-value__remove {
+    background-color: #3e3d3d;
+}
+
+.react-select__multi-value__remove:hover {
+    background-color: #333333 !important;
+}
+
+.react-select__multi-value__label, .react-select__value-container, .react-select__multi-value {
+    background-color: #333333 !important;
+    color: #e8e8e8 !important;
+}
+
+.react-select__indicators {
+    background-color: #333333;
+}
+
+.react-select__control {
+    overflow: hidden !important;
+}

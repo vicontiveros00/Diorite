@@ -29,13 +29,13 @@ const NoteForm = ({ onSubmit }: NoteFormProps) => {
                     <Col>
                         <Form.Group controlId='title'>
                             <Form.Label>Title</Form.Label>
-                            <Form.Control ref={titleRef} required />
+                            <Form.Control className='input-title' ref={titleRef} required />
                         </Form.Group>
                     </Col>
                     <Col>
                         <Form.Group controlId='tags'>
                             <Form.Label>Tags</Form.Label>
-                            <CreatableReactSelect value={
+                            <CreatableReactSelect className="react-select-container" classNamePrefix="react-select" value={
                                 noteTags.map(tag => {
                                     return {
                                         label: tag.label,
@@ -55,7 +55,7 @@ const NoteForm = ({ onSubmit }: NoteFormProps) => {
                 </Row>
                 <Form.Group controlId='markdown'>
                     <Form.Label>Text</Form.Label>
-                    <Form.Control ref={markdownRef} required as="textarea" rows={15} />
+                    <Form.Control className='input-text' ref={markdownRef} required as="textarea" rows={14} />
                 </Form.Group>
                 <Stack direction='horizontal' gap={2} className='justify-content-end'>
                     <Button type='submit' variant='primary'>Save</Button>
