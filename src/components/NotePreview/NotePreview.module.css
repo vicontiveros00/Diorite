@@ -1,0 +1,10 @@
+.preview {
+    background-color: #333333 !important;
+    transition: translate ease-in-out 100ms,
+        box-shadow ease-in-out 100ms;
+}
+
+.preview:focus, .preview:hover {
+    translate: 0 -3px;
+    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, .2);
+}

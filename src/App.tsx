@@ -1,5 +1,5 @@
 //typescript is painful but i'm trying
-import { Routes, Route, Navigate, Link } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 import NewNote from './components/NewNote';
@@ -13,6 +13,12 @@ export type RawNote = {
   id: string
 } & RawNoteData
 //in the event a diorite note is edited, id will remain the same even if content changes
+
+export type NotePreviewProps = {
+  tags: Tag[],
+  title: string,
+  id: string
+}
 
 export type RawNoteData = {
   title: string,
@@ -36,12 +42,17 @@ type Note = {
   id: string
 } & NoteData
 
+//for components that use existing tags as a prop
+export type NoteListProps = {
+  existingTags: Tag[],
+  notes: NotePreviewProps[]
+}
+
 //type for note components such as newnote and noteform
 export type NoteComponentProps = {
   onSubmit: (data: NoteData) => void
   onAddTag: (tag: Tag) => void
-  existingTags: Tag[]
-}
+} & NoteListProps
 //
 
 const App = () => {
@@ -81,12 +92,12 @@ const App = () => {
     <Container className="my-3">
       {/*Routing*/}
       <Routes>
-        <Route path="/" element={<NoteList />} />
+        <Route path="/" element={<NoteList existingTags={tags} notes={notesWithTags} />} />
         <Route path="/new" element={<NewNote
           onSubmit={createNote}
           onAddTag={addTag}
           existingTags={tags}
-        />} />
+          notes={[] /*just pass an empty array to conform to NoteComponentProp type*/} />} />
         <Route path="/:id">
           <Route index element = {<h1>Show</h1>} />
           <Route path="edit" element = {<h1>Edit</h1>} />

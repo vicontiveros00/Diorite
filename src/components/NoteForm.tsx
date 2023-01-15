@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
 import { NoteComponentProps, Tag } from '../App';
 import { v4 as generateUUID } from 'uuid';
+import convertTags from '../util/convertTags';
 
 const NoteForm = ({ onSubmit, onAddTag, existingTags }: NoteComponentProps) => {
     const titleRef = useRef<HTMLInputElement>(null);
@@ -24,16 +25,6 @@ const NoteForm = ({ onSubmit, onAddTag, existingTags }: NoteComponentProps) => {
         //submit to NoteData
         redirect('..')
         //redirect to previous page
-    }
-
-    //assign label and tag id to each tag so CreateReactSelect can recognize each tag, peep CreatableReactSelect documantation, same thing for value attribute and onChange attribute
-    const convertTags = (tags: Tag[]) => {
-        return tags.map((tag) => {
-            return {
-                label: tag.label,
-                value: tag.id
-            }
-        })
     }
 
     return (

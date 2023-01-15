@@ -6,7 +6,7 @@ body {
 }
 
 /*yes you really do need all of this to style react select 😭*/
-.input-title, .input-text, .react-select__menu, .react-select__menu-list, .react-select__option {
+.input-title, .input-text, .react-select__menu, .react-select__menu-list, .react-select__option, .form-control {
     background-color: #333333 !important;
     color: #e8e8e8 !important;
 }
@@ -17,8 +17,8 @@ body {
     border: 1px solid #ced4da;
 }
 
-.react-select__multi-value__remove {
-    background-color: #3e3d3d;
+.react-select__multi-value__remove, .react-select__option:hover {
+    background-color: #3e3d3d !important;
 }
 
 .react-select__multi-value__remove:hover {
@@ -55,6 +55,11 @@ body {
 .btn-primary:hover {
     background-color: #56008f !important;
     border-color: #56008f !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #41006c !important;
+    border-color: #41006c !important;
 }
 
 a {

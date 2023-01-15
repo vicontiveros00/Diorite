@@ -10,6 +10,7 @@ const NewNote = ({ onSubmit, onAddTag, existingTags }: NoteComponentProps) => {
                 onSubmit={onSubmit}
                 onAddTag={onAddTag}
                 existingTags={existingTags}
+                notes={[]}
             />
         </>
     )
