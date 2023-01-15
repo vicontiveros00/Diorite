@@ -1,10 +1,16 @@
+import { NoteComponentProps } from "../App"
 import NoteForm from "./NoteForm"
 
-const NewNote = () => {
+
+const NewNote = ({ onSubmit, onAddTag, existingTags }: NoteComponentProps) => {
     return (
         <>
             <h1 className="mb-4">New Note</h1>
-            <NoteForm />
+            <NoteForm
+                onSubmit={onSubmit}
+                onAddTag={onAddTag}
+                existingTags={existingTags}
+            />
         </>
     )
 }

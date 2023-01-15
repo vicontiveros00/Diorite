@@ -35,3 +35,26 @@ body {
 .react-select__control {
     overflow: hidden !important;
 }
+
+:focus, :focus-visible, .react-select__control--is-focused {
+    border-color: #7400c2 !important;
+    box-shadow: none !important;
+    border-radius: 0.6rem !important;
+    transition: 600ms !important;
+}
+
+/*bootstrap overrides*/
+
+.btn-primary {
+    background-color: #7400c2 !important;
+    border-color: #7400c2 !important;
+}
+
+.btn-primary:hover {
+    background-color: #56008f !important;
+    border-color: #56008f !important;
+}
+
+a {
+    color: #7400c2 !important;
+}
