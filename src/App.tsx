@@ -6,6 +6,7 @@ import NewNote from './components/NewNote';
 import useLocalStorage from './hooks/useLocalStorage';
 import { useMemo } from 'react';
 import { v4 as generateUUID } from 'uuid';
+import NoteList from './components/NoteList';
 
 //types
 export type RawNote = {
@@ -48,10 +49,12 @@ const App = () => {
   const [tags, setTags] = useLocalStorage<Tag[]>("Tags", [])
 
   const notesWithTags = useMemo(() => {
-    return notes.map(note => {
+    return notes.map((note) => {
       return {
         ...note,
-        tags: tags.filter(tag => note.tagIds.includes(tag.id))
+        tags: tags.filter((tag) => {
+          return note.tagIds.includes(tag.id)
+        })
       }
       //loop through notes, get tags with associate IDs from each stored note when a note or tag is updated
     })
@@ -75,16 +78,10 @@ const App = () => {
   } 
 
   return (
-    <Container className="my-4">
+    <Container className="my-3">
+      {/*Routing*/}
       <Routes>
-        <Route path="/" element={
-          //temporary home page element until implemented
-          <>
-            <h1>Diorite</h1>
-            <p>Write Diorites (notes) and store them locally in your browser as JSON. Full Markdown support.</p>
-            <Link to="/new">Create Note</Link>
-          </>
-        } />
+        <Route path="/" element={<NoteList />} />
         <Route path="/new" element={<NewNote
           onSubmit={createNote}
           onAddTag={addTag}
