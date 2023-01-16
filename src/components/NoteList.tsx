@@ -2,13 +2,17 @@ import { useMemo, useState } from "react";
 import { Button, Col, Row, Stack, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactSelect from 'react-select';
-import { NoteListProps, Tag } from "../App";
 import convertTags from "../util/convertTags";
+import { NoteListProps, Tag } from "../util/types";
 import NotePreview from "./NotePreview/NotePreview";
+import TagsModal from "./Modals/TagsModal";
+import Settings from "./Modals/Settings";
 
-const NoteList = ({ existingTags, notes }: NoteListProps) => {
+const NoteList = ({ existingTags, notes, updateTag, removeTag }: NoteListProps) => {
     const [currentTags, setCurrentTags] = useState<Tag[]>([]);
     const [title, setTitle] = useState<string>('');
+    const [manageTagModalOpen, setManageTagModalOpen] = useState<boolean>(false);
+    const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
 
     const findNote = useMemo(() => {
         return notes.filter((note) => {
@@ -29,16 +33,19 @@ const NoteList = ({ existingTags, notes }: NoteListProps) => {
             {/*nav bar*/}
             <Row className="align-items-center mb-4">
                 <Col>
-                    <h1>Diorites</h1>
+                    <h1>Diorite</h1>
                 </Col>
                 <Col xs="auto">
                     <Stack direction={"horizontal"} gap={2}>
                         <Link to ='/new'>
                             <Button variant='primary'>New Diorite</Button>
                         </Link>
-                        <Button title='Feature coming soon!' variant='outline-secondary'>Manage Tags</Button>
-                        <Button title='Feature coming soon!' variant='outline-secondary'>⚙️</Button>
-                        {/*add settings menu*/}
+                        <Button onClick={() => {
+                            setManageTagModalOpen(true);
+                        }} variant='outline-secondary'>Manage Tags</Button>
+                        <Button onClick={() => {
+                            setShowSettingsModal(true);
+                        }}variant='outline-secondary'>⚙️</Button>
                     </Stack>
                 </Col>
             </Row>
@@ -88,6 +95,13 @@ const NoteList = ({ existingTags, notes }: NoteListProps) => {
                     )
                 })}
             </Row>
+            {/*Modals*/}
+            <TagsModal existingTags={existingTags} updateTag={updateTag} removeTag={removeTag} showTagModal={manageTagModalOpen} handleClose={() => {
+                setManageTagModalOpen(false);
+            }} />
+            <Settings showSettingsModal={showSettingsModal} handleClose={() => {
+                setShowSettingsModal(false);
+            }} />
         </>
     )
 }

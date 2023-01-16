@@ -1,1 +1,1 @@
-work in progress
+todo: write readme

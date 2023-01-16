@@ -10,63 +10,8 @@ import NoteList from './components/NoteList';
 import { Layout } from './components/Layout';
 import ShowNote from './components/ShowNote';
 import EditNote from './components/EditNote';
-
-//types
-export type RawNote = {
-  id: string
-} & RawNoteData
-//in the event a diorite note is edited, id will remain the same even if content changes
-
-export type NotePreviewProps = {
-  tags: Tag[],
-  title: string,
-  id: string
-}
-
-export type RawNoteData = {
-  title: string,
-  markdown: string,
-  tagIds: string[]
-  //only takes id of each tag to keep reference if tag content changes
-}
-
-export type Tag = {
-  id: string,
-  label: string
-}
-
-export type NoteData = {
-  title: string,
-  markdown: string,
-  tags: Tag[]
-}
-
-export type Note = {
-  id: string
-} & NoteData
-
-//for components that use existing tags as a prop
-export type NoteListProps = {
-  existingTags: Tag[],
-  notes: NotePreviewProps[]
-}
-
-//type for note components such as newnote and noteform
-export type NoteComponentProps = {
-  onSubmit: (data: NoteData) => void
-  onAddTag: (tag: Tag) => void
-} & NoteListProps & Partial<NoteData>
-
-export type NoteLayoutProps = {
-  notes: Note[]
-}
-
-export type EditNoteProps = {
-  onSubmit: (id: string, data: NoteData) => void
-  onAddTag: (tag: Tag) => void
-  existingTags: Tag[]
-}
-//
+import Package from '../package.json';
+import { RawNote, Tag, NoteData } from './util/types';
 
 const App = () => {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("Notes", [])
@@ -114,33 +59,67 @@ const App = () => {
       })
     })
   }
+
+  const deleteNote = (id: string) => {
+    setNotes ((previousNotes) => {
+      return previousNotes.filter((note) => {
+        return note.id !== id
+      })
+    })
+  }
+  
   
   const addTag = (tag: Tag) => {
     setTags((previousTags) => [...previousTags, tag]);
-  } 
+  }
+
+  const updateTag = (id: string, label: string) => {
+    setTags((previousTags) => {
+      return previousTags.map((tag) => {
+        if (tag.id === id) {
+          return {
+            ...tag,
+            label
+          }
+        } else {
+          return tag;
+        }
+      })
+    })
+  }
+
+  const removeTag = (id: string) => {
+    setTags((previousTags) => {
+      return previousTags.filter((tag) => {
+        return tag.id !== id
+      })
+    })
+  }
 
   return (
     <Container className="my-3">
       {/*Routing*/}
       <Routes>
-        <Route path="/" element={<NoteList existingTags={tags} notes={notesWithTags} />} />
+        <Route path="/" element={<NoteList existingTags={tags} notes={notesWithTags} updateTag={updateTag} removeTag={removeTag} />} />
         <Route path="/new" element={<NewNote
           onSubmit={createNote}
           onAddTag={addTag}
           existingTags={tags}
-          notes={[]}
         />} />
         <Route path="/:id" element={<Layout notes={notesWithTags} /> }>
-          <Route index element = {<ShowNote />} />
+          <Route index element = {<ShowNote onDeleteNote={deleteNote} />} />
           <Route path="edit" element = {<EditNote 
             onSubmit={updateNote}
             onAddTag={addTag}
             existingTags={tags}
           />} />
         </Route>
-        {/*<Route path="*" element={<Navigate to="/" />} />*/}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-      <small>Prerelease</small>
+      <div className='footer'>
+        <small>v{Package.version}</small><br />
+        <a href='https://github.com/vicontiveros00'>github/vicontiveros00</a>
+      </div>
     </Container>
   )
 }

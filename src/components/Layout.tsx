@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useOutletContext, useParams } from "react-router-dom"
-import { Note, NoteLayoutProps } from "../App"
+import { Note, NoteLayoutProps } from "../util/types";
 
 export const Layout = ({ notes }: NoteLayoutProps) => {
     const { id } = useParams();

@@ -2,9 +2,9 @@ import { Form, Stack, Row, Col, Button } from 'react-bootstrap';
 import CreatableReactSelect from 'react-select/creatable';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormEvent, useRef, useState } from 'react';
-import { NoteComponentProps, Tag } from '../App';
 import { v4 as generateUUID } from 'uuid';
 import convertTags from '../util/convertTags';
+import { NoteFormProps, Tag } from '../util/types';
 
 const NoteForm = ({
         onSubmit,
@@ -13,7 +13,7 @@ const NoteForm = ({
         title = '',
         markdown = '',
         tags = []
-    }: NoteComponentProps) => {
+    }: NoteFormProps) => {
     const titleRef = useRef<HTMLInputElement>(null);
     //get title from input
     const textRef = useRef<HTMLTextAreaElement>(null);

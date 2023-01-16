@@ -1,4 +1,4 @@
-import { EditNoteProps } from "../App"
+import { EditNoteProps } from "../util/types";
 import { useCurrentNote } from "./Layout"
 import NoteForm from "./NoteForm"
 
@@ -17,7 +17,6 @@ const EditNote = ({ onSubmit, onAddTag, existingTags }: EditNoteProps) => {
                 }}
                 onAddTag={onAddTag}
                 existingTags={existingTags}
-                notes={[]}
             />
         </>
     )

@@ -1,4 +1,4 @@
-import { Tag } from "../App";
+import { Tag } from "./types";
 
 //assign label and tag id to each tag so CreateReactSelect/ReactSelect can recognize each tag, peep CreatableReactSelect/ReactSelect documantation
 const convertTags = (tags: Tag[]) => {

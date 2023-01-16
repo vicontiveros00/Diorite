@@ -1,6 +1,7 @@
 import { Badge, Card, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { NotePreviewProps } from "../../App";
+import { NotePreviewProps } from "../../util/types";
+
 import styles from './NotePreview.module.css';
 
 const NotePreview = ({ id, title, tags }: NotePreviewProps) => {

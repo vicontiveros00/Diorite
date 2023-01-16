@@ -1,10 +1,12 @@
 import { Badge, Button, Col, Row, Stack } from "react-bootstrap";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ShowNoteProps } from "../util/types";
 import { useCurrentNote } from "./Layout";
 
-const ShowNote = () => {
+const ShowNote = ({ onDeleteNote }: ShowNoteProps) => {
     const currentNote = useCurrentNote();
+    const redirect = useNavigate();
 
     return <>
         <Row className='align-items-center mb-3'>
@@ -29,7 +31,10 @@ const ShowNote = () => {
                     <Link to ={`/${currentNote.id}/edit`}>
                         <Button variant='primary'>Edit</Button>
                     </Link>
-                    <Button title='Feature coming soon!' variant='outline-danger'>Delete</Button>
+                    <Button onClick={() => {
+                        onDeleteNote(currentNote.id);
+                        redirect('/');
+                    }} variant='outline-danger'>Delete</Button>
                     <Link to='/'>
                         <Button variant='outline-secondary'>Back</Button>
                     </Link>
