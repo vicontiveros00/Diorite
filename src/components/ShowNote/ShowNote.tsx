@@ -1,15 +1,16 @@
 import { Badge, Button, Col, Row, Stack } from "react-bootstrap";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { Link, useNavigate } from "react-router-dom";
-import { ShowNoteProps } from "../util/types";
-import { useCurrentNote } from "./Layout";
+import { ShowNoteProps } from "../../util/types";
+import { useCurrentNote } from "../Layout";
+import './MarkdownStyles.css'
 
 const ShowNote = ({ onDeleteNote }: ShowNoteProps) => {
     const currentNote = useCurrentNote();
     const redirect = useNavigate();
 
     return <>
-        <Row className='align-items-center mb-3'>
+        <Row className='align-items-center'>
             <Col>
                 <h1>{currentNote.title}</h1>
                 {currentNote.tags.length > 0 && (
@@ -41,6 +42,7 @@ const ShowNote = ({ onDeleteNote }: ShowNoteProps) => {
                 </Stack>
             </Col>
         </Row>
+        <hr className='mb-5'/>
         <ReactMarkdown>{currentNote.markdown}</ReactMarkdown>
     </>
 }

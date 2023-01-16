@@ -19,6 +19,11 @@ body {
     color: #ff2020;
 }
 
+.note-title-bar {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #000 !important;
+}
+
 /*yes you really do need all of this to style react select 😭*/
 .input-title, .input-text, .react-select__menu, .react-select__menu-list, .react-select__option, .form-control {
     background-color: #333333 !important;

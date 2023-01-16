@@ -62,7 +62,7 @@ const NoteList = ({ existingTags, notes, updateTag, removeTag }: NoteListProps) 
                     </Col>
                     <Col>
                     <Form.Group controlId='tags'>
-                        <Form.Label>Tags</Form.Label>
+                        <Form.Label>Filter by tags</Form.Label>
                         <ReactSelect 
                             className="react-select-container"
                             classNamePrefix="react-select" 
@@ -83,7 +83,8 @@ const NoteList = ({ existingTags, notes, updateTag, removeTag }: NoteListProps) 
                 </Row>
             </Form>
             <Row xs={1} sm={2} lg={3} xl={4} className='g-3 mb-3'>
-                {findNote.map((note) => {
+                {findNote.reverse().map((note) => {
+                    //reversed to show most recent first
                     return (
                         <Col key={note.id}>
                             <NotePreview

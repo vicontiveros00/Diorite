@@ -8,7 +8,7 @@ import { useMemo } from 'react';
 import { v4 as generateUUID } from 'uuid';
 import NoteList from './components/NoteList';
 import { Layout } from './components/Layout';
-import ShowNote from './components/ShowNote';
+import ShowNote from './components/ShowNote/ShowNote';
 import EditNote from './components/EditNote';
 import Package from '../package.json';
 import { RawNote, Tag, NoteData } from './util/types';
