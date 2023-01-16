@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Button, Col, Row, Stack, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactSelect from 'react-select';
@@ -7,12 +7,20 @@ import { NoteListProps, Tag } from "../util/types";
 import NotePreview from "./NotePreview/NotePreview";
 import TagsModal from "./Modals/TagsModal";
 import Settings from "./Modals/Settings";
+import NewUser from "./Modals/NewUser";
 
 const NoteList = ({ existingTags, notes, updateTag, removeTag }: NoteListProps) => {
     const [currentTags, setCurrentTags] = useState<Tag[]>([]);
     const [title, setTitle] = useState<string>('');
     const [manageTagModalOpen, setManageTagModalOpen] = useState<boolean>(false);
     const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
+    const [showNewUserModal, setShowNewUserModal] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (notes.length === 0) {
+            setShowNewUserModal(true)
+        }
+    }, [])
 
     const findNote = useMemo(() => {
         return notes.filter((note) => {
@@ -97,6 +105,9 @@ const NoteList = ({ existingTags, notes, updateTag, removeTag }: NoteListProps) 
                 })}
             </Row>
             {/*Modals*/}
+            <NewUser showNewUserModal={showNewUserModal} handleClose={() => {
+                setShowNewUserModal(false);
+            }}/>
             <TagsModal existingTags={existingTags} updateTag={updateTag} removeTag={removeTag} showTagModal={manageTagModalOpen} handleClose={() => {
                 setManageTagModalOpen(false);
             }} />

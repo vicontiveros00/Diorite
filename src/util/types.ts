@@ -80,3 +80,8 @@ export type SettingsModal = {
     showSettingsModal: boolean
     handleClose: () => void
 }
+
+export type NewUserModal = {
+    showNewUserModal: boolean
+    handleClose: () => void
+}

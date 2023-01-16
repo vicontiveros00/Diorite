@@ -30,12 +30,14 @@ const Settings = ({ showSettingsModal, handleClose }: SettingsModal) => {
 
     return (
         <Modal show={showSettingsModal} onHide={handleClose}>
-            <Modal.Header closeButton closeVariant='white'>
-                <Modal.Title>Settings</Modal.Title>
+            <Modal.Header closeButton closeVariant='white' onClick={() => {
+                setDeleteClickCounts(0)
+            }}>
+                <Modal.Title>Settings <span className='spin'>⚙️</span></Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Stack gap={2}>
-                    <Row>
+                    <Row className="d-flex align-items-center">
                         <Col>Click 3 times to delete all local data.{renderDeleteText()}</Col>
                         <Col xs='auto'>
                             <Button disabled={deleteClickCounts >= 3} onClick={() => {

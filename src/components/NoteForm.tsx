@@ -42,6 +42,7 @@ const NoteForm = ({
                         <Form.Group controlId='title'>
                             <Form.Label>Title</Form.Label>
                             <Form.Control
+                                placeholder="Diorite's title...."
                                 className='input-title'
                                 ref={titleRef}
                                 defaultValue={title}
@@ -81,11 +82,12 @@ const NoteForm = ({
                     </Col>
                 </Row>
                 <Form.Group controlId='markdown'>
-                    <Form.Label>Text</Form.Label>
+                    <Form.Label>Markdown</Form.Label>
                     <Form.Control
                         className='input-text'
                         ref={textRef}
                         defaultValue={markdown}
+                        placeholder='Type Markdown text here....'
                         required as="textarea"
                         rows={14} 
                     />

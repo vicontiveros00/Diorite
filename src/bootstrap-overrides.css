@@ -24,6 +24,23 @@ body {
     border-bottom: 1px solid #000 !important;
 }
 
+.spin {
+    font-size: 1.2rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 5000ms infinite linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
 /*yes you really do need all of this to style react select 😭*/
 .input-title, .input-text, .react-select__menu, .react-select__menu-list, .react-select__option, .form-control {
     background-color: #333333 !important;
@@ -86,7 +103,7 @@ body {
 }
 
 .modal-content {
-    background-color: #3e3d3d !important;
+    background-color: #1f1e1e !important;
     border: 1px solid #41006c !important;
 }
 
@@ -94,6 +111,14 @@ body {
     border-bottom: none !important;
 }
 
+textarea {
+    resize: none !important;
+}
+
 a {
-    color: #9900ff !important;
+    color: #e8e8e8 !important;
+}
+
+a:hover {
+    color: #fff !important;
 }
