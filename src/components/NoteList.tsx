@@ -17,9 +17,7 @@ const NoteList = ({ existingTags, notes, updateTag, removeTag }: NoteListProps) 
     const [showNewUserModal, setShowNewUserModal] = useState<boolean>(false);
 
     useEffect(() => {
-        if (notes.length === 0) {
-            setShowNewUserModal(true)
-        }
+        setShowNewUserModal(notes.length === 0 && existingTags.length === 0)
     }, [])
 
     const findNote = useMemo(() => {

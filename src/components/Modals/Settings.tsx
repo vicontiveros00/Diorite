@@ -37,7 +37,7 @@ const Settings = ({ showSettingsModal, handleClose }: SettingsModal) => {
             </Modal.Header>
             <Modal.Body>
                 <Stack gap={2}>
-                    <Row className="d-flex align-items-center">
+                    <Row className="align-items-center">
                         <Col>Click 3 times to delete all local data.{renderDeleteText()}</Col>
                         <Col xs='auto'>
                             <Button disabled={deleteClickCounts >= 3} onClick={() => {
@@ -50,10 +50,15 @@ const Settings = ({ showSettingsModal, handleClose }: SettingsModal) => {
                             <p className="warning">You will lose all Diorites and tag data. This cannot be undone!</p>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className="align-items-center">
                         <Col>
                             <p>About:<br />Welcome to Diorite, a note taking app right in your browser with full Markdown support. Add tags to organize and filter your Diorites.</p>
                             <p>Version {Package.version}</p>
+                        </Col>
+                        <Col xs='auto'>
+                            <a target='_blank' rel="noreferrer" href='https://www.markdownguide.org/basic-syntax/'>
+                                <Button variant="primary">Markdown Syntax</Button>
+                            </a>
                         </Col>
                     </Row>
                 </Stack>
