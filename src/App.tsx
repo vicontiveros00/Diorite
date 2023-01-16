@@ -7,6 +7,9 @@ import useLocalStorage from './hooks/useLocalStorage';
 import { useMemo } from 'react';
 import { v4 as generateUUID } from 'uuid';
 import NoteList from './components/NoteList';
+import { Layout } from './components/Layout';
+import ShowNote from './components/ShowNote';
+import EditNote from './components/EditNote';
 
 //types
 export type RawNote = {
@@ -38,7 +41,7 @@ export type NoteData = {
   tags: Tag[]
 }
 
-type Note = {
+export type Note = {
   id: string
 } & NoteData
 
@@ -52,7 +55,17 @@ export type NoteListProps = {
 export type NoteComponentProps = {
   onSubmit: (data: NoteData) => void
   onAddTag: (tag: Tag) => void
-} & NoteListProps
+} & NoteListProps & Partial<NoteData>
+
+export type NoteLayoutProps = {
+  notes: Note[]
+}
+
+export type EditNoteProps = {
+  onSubmit: (id: string, data: NoteData) => void
+  onAddTag: (tag: Tag) => void
+  existingTags: Tag[]
+}
 //
 
 const App = () => {
@@ -83,6 +96,24 @@ const App = () => {
       }]
     })
   }
+
+  const updateNote = (id: string, { tags, ...data }: NoteData) => {
+    setNotes((previousNotes) => {
+      return previousNotes.map((note) => {
+        if (note.id === id) {
+          return {
+            ...note, //save existing note data
+            ...data, //overwrite with new data
+            tagIds: tags.map((tag) => {
+              return tag.id;
+            }) //store tags associated with note with their respective id
+          }
+        } else {
+          return note; //no changes made
+        }
+      })
+    })
+  }
   
   const addTag = (tag: Tag) => {
     setTags((previousTags) => [...previousTags, tag]);
@@ -97,13 +128,19 @@ const App = () => {
           onSubmit={createNote}
           onAddTag={addTag}
           existingTags={tags}
-          notes={[] /*just pass an empty array to conform to NoteComponentProp type*/} />} />
-        <Route path="/:id">
-          <Route index element = {<h1>Show</h1>} />
-          <Route path="edit" element = {<h1>Edit</h1>} />
+          notes={[]}
+        />} />
+        <Route path="/:id" element={<Layout notes={notesWithTags} /> }>
+          <Route index element = {<ShowNote />} />
+          <Route path="edit" element = {<EditNote 
+            onSubmit={updateNote}
+            onAddTag={addTag}
+            existingTags={tags}
+          />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" />} />
+        {/*<Route path="*" element={<Navigate to="/" />} />*/}
       </Routes>
+      <small>Prerelease</small>
     </Container>
   )
 }

@@ -9,14 +9,15 @@ import NotePreview from "./NotePreview/NotePreview";
 const NoteList = ({ existingTags, notes }: NoteListProps) => {
     const [currentTags, setCurrentTags] = useState<Tag[]>([]);
     const [title, setTitle] = useState<string>('');
-    console.log(currentTags);
 
     const findNote = useMemo(() => {
         return notes.filter((note) => {
             return (
                 (note.title.toLowerCase().includes(title.toLowerCase()) || title === '') &&
                 (currentTags.every((tag) => {
-                    return note.tags.some(noteTag => noteTag.id === tag.id)
+                    return note.tags.some((noteTag) => {
+                        return noteTag.id === tag.id
+                    })
                 }) || currentTags.length === 0)
             )
         })
@@ -35,8 +36,8 @@ const NoteList = ({ existingTags, notes }: NoteListProps) => {
                         <Link to ='/new'>
                             <Button variant='primary'>New Diorite</Button>
                         </Link>
-                        <Button variant='outline-secondary'>Manage Tags</Button>
-                        <Button variant='outline-secondary'>⚙️</Button>
+                        <Button title='Feature coming soon!' variant='outline-secondary'>Manage Tags</Button>
+                        <Button title='Feature coming soon!' variant='outline-secondary'>⚙️</Button>
                         {/*add settings menu*/}
                     </Stack>
                 </Col>
@@ -74,7 +75,7 @@ const NoteList = ({ existingTags, notes }: NoteListProps) => {
                     </Col>
                 </Row>
             </Form>
-            <Row xs={1} sm={2} lg={3} xl={4} className='g-3'>
+            <Row xs={1} sm={2} lg={3} xl={4} className='g-3 mb-3'>
                 {findNote.map((note) => {
                     return (
                         <Col key={note.id}>

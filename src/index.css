@@ -62,6 +62,10 @@ body {
     border-color: #41006c !important;
 }
 
+.badge {
+    background-color: #7400c2 !important
+}
+
 a {
     color: #7400c2 !important;
 }

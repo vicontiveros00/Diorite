@@ -6,12 +6,19 @@ import { NoteComponentProps, Tag } from '../App';
 import { v4 as generateUUID } from 'uuid';
 import convertTags from '../util/convertTags';
 
-const NoteForm = ({ onSubmit, onAddTag, existingTags }: NoteComponentProps) => {
+const NoteForm = ({
+        onSubmit,
+        onAddTag,
+        existingTags,
+        title = '',
+        markdown = '',
+        tags = []
+    }: NoteComponentProps) => {
     const titleRef = useRef<HTMLInputElement>(null);
     //get title from input
     const textRef = useRef<HTMLTextAreaElement>(null);
     //get markdown text from textarea
-    const [noteTags, setCurrentTags] = useState<Tag[]>([])
+    const [noteTags, setCurrentTags] = useState<Tag[]>(tags)
     //rerender when tag changes and store them
     const redirect = useNavigate();
 
@@ -34,7 +41,12 @@ const NoteForm = ({ onSubmit, onAddTag, existingTags }: NoteComponentProps) => {
                     <Col>
                         <Form.Group controlId='title'>
                             <Form.Label>Title</Form.Label>
-                            <Form.Control className='input-title' ref={titleRef} required />
+                            <Form.Control
+                                className='input-title'
+                                ref={titleRef}
+                                defaultValue={title}
+                                required
+                            />
                         </Form.Group>
                     </Col>
                     <Col>
@@ -70,7 +82,13 @@ const NoteForm = ({ onSubmit, onAddTag, existingTags }: NoteComponentProps) => {
                 </Row>
                 <Form.Group controlId='markdown'>
                     <Form.Label>Text</Form.Label>
-                    <Form.Control className='input-text' ref={textRef} required as="textarea" rows={14} />
+                    <Form.Control
+                        className='input-text'
+                        ref={textRef}
+                        defaultValue={markdown}
+                        required as="textarea"
+                        rows={14} 
+                    />
                 </Form.Group>
                 <Stack direction='horizontal' gap={2} className='justify-content-end'>
                     <Button type='submit' variant='primary'>Save</Button>
