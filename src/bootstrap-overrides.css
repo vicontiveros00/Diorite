@@ -75,11 +75,17 @@ body {
 }
 
 :focus, :focus-visible, .react-select__control--is-focused {
+    background-color: none !important;
     border-color: #7400c2 !important;
     box-shadow: none !important;
     border-radius: 0.6rem !important;
     transition: 600ms !important;
+    color: #e8e8e8 !important;
 }
+.react-select__control--is-focused {
+    background: none !important;
+}
+
 
 /*bootstrap overrides*/
 

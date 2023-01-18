@@ -10,10 +10,8 @@ const Settings = ({ showSettingsModal, handleClose }: SettingsModal) => {
     const redirect = useNavigate();
 
     const renderDeleteText = (): string => {
-        if (deleteClickCounts > 0 && deleteClickCounts < 2) {
-            return ` Clicked ${deleteClickCounts} time.`
-        } else if (deleteClickCounts > 0) {
-            return ` Clicked ${deleteClickCounts} times.`
+        if (deleteClickCounts > 0) {
+            return ` (${deleteClickCounts})`
         }
         return ''
     }
@@ -55,11 +53,11 @@ const Settings = ({ showSettingsModal, handleClose }: SettingsModal) => {
                             <p>About:<br />Welcome to Diorite, a note taking app right in your browser with full Markdown support. Add tags to organize and filter your Diorites.</p>
                             <p>Version {Package.version}</p>
                         </Col>
-                        <Col xs='auto'>
-                            <a target='_blank' rel="noreferrer" href='https://www.markdownguide.org/basic-syntax/'>
-                                <Button variant="primary">Markdown Syntax</Button>
-                            </a>
-                        </Col>
+                    </Row>
+                    <Row>
+                        <a target='_blank' rel="noreferrer" href='https://www.markdownguide.org/basic-syntax/'>
+                            <Button variant="primary">Markdown Syntax</Button>
+                        </a>
                     </Row>
                 </Stack>
             </Modal.Body>
